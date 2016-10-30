@@ -1,3 +1,5 @@
+import random
+
 #Let's Make a game!!
 #
 #Recommendations:
@@ -6,7 +8,7 @@
 #     1. survival (energy consumption)
 #     2. upgrades (tools) (Either earn more, or less energy)
 #     3. unexpected events (Fired from job, enemy attacks, robbery)
-
+event = 
 pizza = 5
 games = 0
 energy = 10
@@ -50,11 +52,11 @@ while True:
         print('Select an energy fufiller! \n\nInventory:\n\nPizzas:',pizza, '\nGames:',games, '\n\n(E to exit)')
         ans = input('\n\n>>>')
         if(ans == 'P'):
-            print(name, 'ate 1 pizza and earned 2 willpower!')
+            print(name, 'ate 1 pizza and earned 2 energy!')
             pizza = pizza - 1
             energy = energy +2
         if(ans == 'G'):
-            print(name, 'played 1 game and earned 4 willpower!')
+            print(name, 'played 1 game and earned 4 energy!')
             games = games - 1
             energy = energy + 4
     if(energy > 10):
@@ -64,7 +66,7 @@ while True:
     else:
         energy = energy - 1
     if(energy == 0):
-        print('But, you ran out of willpower! You failed!')
+        print('But, you ran out of energy! You failed!')
         break
 
 
