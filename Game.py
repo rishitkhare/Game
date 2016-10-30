@@ -7,7 +7,7 @@
 #     2. upgrades (tools) (Either earn more, or less energy)
 #     3. unexpected events (Fired from job, enemy attacks, robbery)
 
-pizza = 0
+pizza = 5
 games = 0
 energy = 10
 money = 0
