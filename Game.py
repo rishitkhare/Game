@@ -21,9 +21,9 @@ salary = 1
 #Inventory & Misc Variables
 turn = 0
 pizza = 5
-games = 0
+games = 2
 energy = 10
-money = 0
+money = 4
 ans = 0
 print("Welcome!\n\n")
 name = input ("Enter name:\n\n>>>")
@@ -67,6 +67,7 @@ while True:
     if(location == 'E' or location == 'e'):
         break
     if(location == 'I' or location == 'i'):
+        location = 'I'
         print('Select an energy fufiller! \n\nInventory:\n\nPizzas:',pizza, '\nGames:',games, '\n\n(E to exit)')
         ans = input('\n\n>>>')
         if(ans == 'P'):
@@ -81,7 +82,7 @@ while True:
         energy = 10
     if(ans == 'E' or  ans == 'e' or ans == ''):
         print('\n\nExited inventory!')
-    else:
+    elif(not location == "I"):
         energy = energy - 1
     if(eventTiming == turn):
         event = int(random.uniform(0,4))
