@@ -100,8 +100,13 @@ while True:
             print("you won $70!")
             money = money + 70
             print("\n\nMoney: $", money)
+        turn = 0
+        eventTiming = int(random.uniform(3,10))
     if(energy == 0):
         print('But, you ran out of energy! You failed!')
+        break
+    if(money < 0):
+        print("YOU ARE IN DEBT! YOU FAILED!!")
         break
 
 
