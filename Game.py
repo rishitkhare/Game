@@ -84,7 +84,7 @@ while True:
     else:
         energy = energy - 1
     if(eventTiming == turn):
-        event = int(random.uniform(0,3))
+        event = int(random.uniform(0,4))
         print("Oh! you", event_list[event], "\n")
         if(event == 0):
             job = False
