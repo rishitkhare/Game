@@ -8,7 +8,18 @@ import random
 #     1. survival (energy consumption)
 #     2. upgrades (tools) (Either earn more, or less energy)
 #     3. unexpected events (Fired from job, enemy attacks, robbery)
-event = 
+#     4. Add Konami Code?
+
+#Event variables
+event_list = ["were fired","were robbed", "were promoted", "won the lottery"]
+eventTiming = int(random.uniform(3,10))
+event = 0
+#Job variables
+job = True
+findJob = 0
+salary = 1
+#Inventory & Misc Variables
+turn = 0
 pizza = 5
 games = 0
 energy = 10
@@ -21,6 +32,7 @@ print("\n\nHello,", name)
 
 
 while True:
+    turn = turn + 1
     print('\nType S for shop\n\nType B to build\n\nType I for inventory\n\n\n\nMoney: $', money, '\n\nwillpower:',energy, "/10\n\n\n\n\n\n\n\n")
     location = input('>>>')
     if(location == 'S' or location == 's'):
@@ -34,18 +46,24 @@ while True:
                 money = money - 5
                 games = games + 1
             elif(money < 5 and ans == 'G'):
-                    print("SHOPKEEPER: You don' have enough money!!")
+                    print("SHOPKEEPER: You don' have enough money for that game!!")
+            
             if(ans == 'P' and money > 1):
                 print('\n\n',name,'paid $ 2 and recieved one pizza!')
                 money = money -2
                 pizza = pizza + 1
             elif(money < 2):
-                    print("SHOPKEEPER: You don' have enough money for that!!")
-                
-                
+                    print("SHOPKEEPER: You don' have enough money for that pizza!!")
+    if(findJob == 0):
+        job = True
+    else:
+        findJob = findJob - 1
     if(location == 'b' or location == 'B'):
-        print(name, 'built a bunch of stuff and earned $ 1!')
-        money = money + 1
+        if(job):
+            print(name, 'built a bunch of stuff and earned $', salary)
+            money = money + salary
+        else:
+            print("You are currently searching for a job...\n\n", findJob, "more days until you find a job!")
     if(location == 'E' or location == 'e'):
         break
     if(location == 'I' or location == 'i'):
@@ -65,6 +83,23 @@ while True:
         print('\n\nExited inventory!')
     else:
         energy = energy - 1
+    if(eventTiming == turn):
+        event = int(random.uniform(0,3))
+        print("Oh! you", event_list[event], "\n")
+        if(event == 0):
+            job = False
+            findJob = 2
+        elif(event == 1):
+            print("The robber stole $4!")
+            money = money - 4
+            print("\n\nMoney: $", money)
+        elif(event == 2):
+            print("salary increased by $1")
+            salary = salary + 1
+        else:
+            print("you won $70!")
+            money = money + 70
+            print("\n\nMoney: $", money)
     if(energy == 0):
         print('But, you ran out of energy! You failed!')
         break
