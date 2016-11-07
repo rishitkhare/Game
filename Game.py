@@ -33,7 +33,7 @@ print("\n\nHello,", name)
 
 while True:
     turn = turn + 1
-    print('\nType S for shop\n\nType B to build\n\nType I for inventory\n\n\n\nMoney: $', money, '\n\nwillpower:',energy, "/10\n\n\n\n\n\n\n\n")
+    print('\nType S for shop\n\nType B to build\n\nType I for inventory\n\n\n\nMoney: $', money, '\n\nEnergy:',energy, "/10\n\n\n\n\n\n\n\n")
     location = input('>>>')
     if(location == 'S' or location == 's'):
         if(money == 0):
