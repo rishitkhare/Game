@@ -11,6 +11,7 @@ import random
 #     4. Add Konami Code?
 
 #Event variables
+location = "B"
 event_list = ["were fired","were robbed", "were promoted", "won the lottery"]
 eventTiming = int(random.uniform(3,10))
 event = 0
@@ -29,12 +30,20 @@ print("Welcome!\n\n")
 name = input ("Enter name:\n\n>>>")
 print("\n\nHello,", name)
 
+# Main functions:
 
+def mainMenu():
+    print('\nType S for shop\n\nType B to build\n\nType I for inventory\n\n\n\nMoney: $', money, '\n\nEnergy:',energy, "/10\n\n\n\n\n\n\n\n")
+
+    
 
 while True:
     turn = turn + 1
-    print('\nType S for shop\n\nType B to build\n\nType I for inventory\n\n\n\nMoney: $', money, '\n\nEnergy:',energy, "/10\n\n\n\n\n\n\n\n")
-    location = input('>>>')
+    
+    #Main Menu
+    mainMenu()
+    location = input(">>>")
+    #Shop
     if(location == 'S' or location == 's'):
         if(money == 0):
             print("STOREKEEPER: If you don't have money, what good are you to me? \n\nCome back when you have something useful!!")
@@ -46,14 +55,14 @@ while True:
                 money = money - 5
                 games = games + 1
             elif(money < 5 and ans == 'G'):
-                    print("SHOPKEEPER: You don' have enough money for that game!!")
+                print("SHOPKEEPER: You don' have enough money for that game!!")
             
             if(ans == 'P' and money > 1):
                 print('\n\n',name,'paid $ 2 and recieved one pizza!')
                 money = money -2
                 pizza = pizza + 1
             elif(money < 2):
-                    print("SHOPKEEPER: You don' have enough money for that pizza!!")
+                print("SHOPKEEPER: You don' have enough money for that pizza!!")
     if(findJob == 0):
         job = True
     else:
@@ -62,6 +71,7 @@ while True:
         if(job):
             print(name, 'built a bunch of stuff and earned $', salary)
             money = money + salary
+            energy = energy-1
         else:
             print("You are currently searching for a job...\n\n", findJob, "more days until you find a job!")
     if(location == 'E' or location == 'e'):
@@ -80,7 +90,7 @@ while True:
             energy = energy + 4
     if(energy > 10):
         energy = 10
-    if(ans == 'E' or  ans == 'e' or ans == ''):
+    if(ans == 'E' or  ans == 'e'):
         print('\n\nExited inventory!')
     elif(not location == "I"):
         energy = energy - 1
