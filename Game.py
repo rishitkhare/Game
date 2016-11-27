@@ -54,7 +54,7 @@ def show_Inventory():
     global games
     global pizza
     
-    print('Select an energy fufiller! \n\nInventory:\n\nPizzas: p, Games: g, Exit: e')
+    print('Select an energy fufiller! \n\nInventory:\n\nPizzas: p \nGames: g \nExit: e')
     print('Pizzas:',pizza)
     print('Games:',games)
 
@@ -192,7 +192,7 @@ while True:
         enter_StorageRoom()
     elif(location.lower() == 'b'):
         enter_Workplace()
-    elif(location.lower == 'e'):
+    elif(location.lower() == 'e'):
         break
 
     if(nextEvent == turn):
