@@ -11,7 +11,6 @@ import random
 #     4. Add Konami Code?
 
 # Main functions:
-
 def ask_Location():
     global money
     global energy
@@ -24,11 +23,16 @@ def enter_Shop():
     global money
     global games
     global pizza
+    global daily_log
+
+    pizzas_bought = 0
+    games_bought = 0
     while True:
         ans = ' '
         if(money == 0):
-            print("STOREKEEPER: If you don\'t have money, what good are you to me?")
+            print("STOREKEEPER: If you don't have money, what good are you to me?")
             print("Come back when you have something useful!!")
+            break
         else:
             print("STOREKEEPER: What would you like? G for video game ($ 5), P for pizza ($ 2)! \nThat's all we sell!\n\n(E to exit)")
             ans = input("\n\n>>>")
@@ -37,6 +41,7 @@ def enter_Shop():
                     print('\n\n',name,'paid $ 5 and recieved 1 game!')
                     money = money - 5
                     games = games + 1
+                    games_bought = games_bought + 1
                 else:
                     print("SHOPKEEPER: You don' have enough money for that game!!")
             if(ans.lower() == 'p'):
@@ -44,11 +49,17 @@ def enter_Shop():
                     print('\n\n',name,'paid $ 2 and recieved one pizza!')
                     money = money -2
                     pizza = pizza + 1
+                    pizzas_bought = pizzas_bought + 1
                 else:
                     print("SHOPKEEPER: You don' have enough money for that pizza!!")
             if(ans.lower() == 'e'):
+                aList = ['Bought', str(pizzas_bought), 'pizzas and', str(games_bought), 'games']
                 print("SHOPKEEPER: Come again soon!")
+                add_EventLog(aList)
                 break
+
+def add_EventLog(eventTokens):
+    daily_log.append(str(" ").join(eventTokens))
     
 def show_Inventory():
     global games
@@ -62,19 +73,24 @@ def enter_StorageRoom():
     global games
     global pizza
     global energy
+    global daily_log
+    gameplay = 0
+    pizzaeat = 0
     while True:
         show_Inventory()
         ans = input('\n\n>>>')
         if(ans.lower() == 'p'):
             print(name, 'ate 1 pizza and earned 2 energy!')
             pizza = pizza - 1
-            energy = energy +2
+            energy = energy + 2
+            pizzaeat = pizzaeat + 1
         if(ans.lower() == 'g'):
             print(name, 'played 1 game and earned 4 energy!')
             games = games - 1
             energy = energy + 4
+            gameplay
         if(ans.lower() == 'e'):
-            print("SHOPKEEPER: Come again soon!")
+            add_EventLog(['Ate', pizzaeat, 'pizzas & played', gameplay, 'games'])
             break
 
 def enter_Workplace():
@@ -84,11 +100,13 @@ def enter_Workplace():
     global energy
     global name
     global findJob
+    global daily_log
                   
     if(job):
         print(name, 'built a bunch of stuff and earned $', salary)
         money = money + salary
         energy = energy-1
+        add_EventLog("built stuff")
     else:
         print("You are currently searching for a job...\n\n", findJob, "more days until you find a job!")
     
@@ -98,12 +116,15 @@ def generate_RandomEvent():
     global findjob
     global money
     global salary
+    global event_list
+    global daily_log
     
     event = int(random.uniform(0,4))
     print("Oh! you", event_list[event], "\n")
     if(event == 0):
         job = False
         daysLeftForJob = 2
+        add_EventLog(event_list[event])
     elif(event == 1):
         print("The robber stole $4!")
         money = money - 4
@@ -143,7 +164,6 @@ def init_event_Variables():
     event = 0
 
 def init_job_Variables():    
-    #Job variables
     global job 
     global daysLeftForJob
     global salary
@@ -152,7 +172,6 @@ def init_job_Variables():
     salary = 1
 
 def init_inventory_Variables():   
-    #Inventory & Misc Variables
     global pizza
     global games
     global energy
@@ -161,16 +180,23 @@ def init_inventory_Variables():
     games = 2
     energy = 10
     money = 4
+
+def init_Journal_variables():
+    global daily_log
+    daily_log = ['Game started']
     
  
 init_event_Variables()
 init_job_Variables()
 init_inventory_Variables()
+init_Journal_variables()
 
 global money
 global energy
 global location
 global name
+global day
+global daily_log
                   
 
 #local variables
@@ -193,6 +219,8 @@ while True:
     elif(location.lower() == 'b'):
         enter_Workplace()
     elif(location.lower() == 'e'):
+        print('\n\nGame was quit.\n\n')
+        print(daily_log)
         break
 
     if(nextEvent == turn):
@@ -209,6 +237,7 @@ while True:
         energy = 10                 
     
     if(is_Failed()):
+        print('\n\n',daily_log)
         break
 
 
