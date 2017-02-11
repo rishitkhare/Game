@@ -24,10 +24,16 @@ def enter_Shop():
     global games
     global pizza
     global daily_log
+    global shop_points
 
     pizzas_bought = 0
     games_bought = 0
     while True:
+        if(shop_points > 9):
+            print("SHOPKEEPER: HEY! You have enough shop points for 5 Pizzas!")
+            pizza = pizza + 5
+            add_EventLog["Earned 5 pizza from shop points"]
+            shop_points = 0
         ans = ' '
         if(money == 0):
             print("STOREKEEPER: If you don't have money, what good are you to me?")
@@ -50,6 +56,7 @@ def enter_Shop():
                     money = money -2
                     pizza = pizza + 1
                     pizzas_bought = pizzas_bought + 1
+                    shop_points = shop_points + 1
                 else:
                     print("SHOPKEEPER: You don' have enough money for that pizza!!")
             if(ans.lower() == 'e'):
@@ -90,7 +97,8 @@ def enter_StorageRoom():
             energy = energy + 4
             gameplay
         if(ans.lower() == 'e'):
-            add_EventLog(['Ate', pizzaeat, 'pizzas & played', gameplay, 'games'])
+            List = ['Ate', str(pizzaeat), 'pizzas & played', str(gameplay), 'games']
+            add_EventLog(List)
             break
 
 def enter_Workplace():
@@ -176,10 +184,12 @@ def init_inventory_Variables():
     global games
     global energy
     global money
+    global shop_points
     pizza = 5
     games = 2
     energy = 10
     money = 4
+    shop_points = 0
 
 def init_Journal_variables():
     global daily_log
