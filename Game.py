@@ -3,12 +3,7 @@ import random
 #Let's Make a game!!
 #
 #Recommendations:
-#
-# - multiple dimensions
-#     1. survival (energy consumption)
 #     2. upgrades (tools) (Either earn more, or less energy)
-#     3. unexpected events (Fired from job, enemy attacks, robbery)
-#     4. Add Konami Code?
 
 # Main functions:
 def ask_Location():
@@ -207,6 +202,7 @@ global location
 global name
 global day
 global daily_log
+profile = {'Name':'', 'Age':'', 'Job':''}
                   
 
 #local variables
@@ -214,11 +210,15 @@ turn = 0
 ans = ''
 
 print("Welcome!\n\n")
-name = input ("Enter name:\n\n>>>")
-print("\n\nHello,", name)
+Name = input("Enter name:\n\n>>>")
 
+
+profile['Name']=name
+print("\n\nHello,", name)
+print("\n\nWhat is your age?\n\n>>>")
 while True:
     turn = turn + 1
+    
     energy = energy - 1
     location = ask_Location()
                   
@@ -249,12 +249,3 @@ while True:
     if(is_Failed()):
         print('\n\n',daily_log)
         break
-
-
-
-
-
-
-
-        
-        
