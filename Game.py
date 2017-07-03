@@ -2,8 +2,6 @@ import random
 
 #Let's Make a game!!
 #
-#Recommendations:
-#     2. upgrades (tools) (Either earn more, or less energy)
 
 # Main functions:
 def ask_Location():
